@@ -21,9 +21,15 @@ struct ContentView: View {
 The following parameters can be added to the view call to further customize its appearance.
 
 fontSize (defaults to 17.0)
+
 displayOnly (defaults to false, disables the on tap gesture that allows you to change the rating)
+
 maxRating (defaults to 5)
+
 showEmptyStars (defaults to true, false will hide empty stars)
+
 allowHalfStars (defaults to true, fasle will ignore the decimal part of a rating rating)
+
 ratingColor defaults to gold
+
 emptyColor deaults to lightGray
