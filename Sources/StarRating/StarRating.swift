@@ -13,58 +13,91 @@ public struct StarRatingView: View {
     @State private var numHalfStars = 0
     @State private var numEmptyStars = 0
     
-    private let MAX_RATING = 5
-    private let RATING_COLOR = Color(UIColor(red: 1.0, green: 0.714, blue: 0.0, alpha: 1.0))
-    private let EMPTY_COLOR = Color(UIColor.lightGray)
+    var rating: Binding<Double>
+    var fontSize: Double
+    var displayOnly: Bool
+    var maxRating: Int
+    var showEmptyStars: Bool
+    var allowHalfStars: Bool
+    var ratingColor: Color
+    var emptyColor: Color
     
-    @Binding var rating: Double
-    var fontSize: Double = 17.0
-    var displayOnly: Bool = false
+    public init (rating: Binding<Double>,
+                 fontSize: Double = 17.0,
+                 displayOnly: Bool = false,
+                 maxRating: Int = 5,
+                 showEmptyStars: Bool = true,
+                 allowHalfStars: Bool = true,
+                 ratingColor: Color = Color(UIColor(red: 1.0, green: 0.714, blue: 0.0, alpha: 1.0)),
+                 emptyColor: Color = Color(UIColor.lightGray)) {
+        self.rating = rating
+        self.fontSize = fontSize
+        self.displayOnly = displayOnly
+        self.maxRating = maxRating
+        self.showEmptyStars = showEmptyStars
+        self.allowHalfStars = allowHalfStars
+        self.ratingColor = ratingColor
+        self.emptyColor = emptyColor
+    }
     
     public var body: some View {
-        HStack {
+        HStack (spacing: 5){
             fullStars
-            halfStars
-            emptyStars
+            if allowHalfStars{
+                halfStars
+            }
+            if showEmptyStars {
+                emptyStars
+            }
         }
         .onAppear {
-            numFullStars = Int(rating)
-            numHalfStars = (rating.truncatingRemainder(dividingBy: 1.0) == 0 ? 0 : 1)
-            numEmptyStars = MAX_RATING - numFullStars - numHalfStars
+            numFullStars = Int(rating.wrappedValue)
+            numHalfStars = (rating.wrappedValue.truncatingRemainder(dividingBy: 1.0) == 0 ? 0 : 1)
+            if allowHalfStars {
+                numEmptyStars = maxRating - numFullStars - numHalfStars
+            } else {
+                numEmptyStars = maxRating - numFullStars
+            }
         }
         .onTapGesture {
             if !displayOnly {
-                if rating == 5.0 {
-                    rating = 0.0
+                if rating.wrappedValue >= Double(maxRating) {
+                    rating.wrappedValue = 0.0
                 } else {
-                    rating += 0.5
+                    if allowHalfStars {
+                        rating.wrappedValue += 0.5
+                    } else {
+                        rating.wrappedValue += 1.0
+                    }
                 }
             }
         }
     }
     
     
-    var fullStars : some View {
+    private var fullStars : some View {
         ForEach (0..<numFullStars, id: \.self) { _ in
             Image(systemName: "star.fill")
-                .foregroundColor(RATING_COLOR)
+                .foregroundColor(ratingColor)
                 .font(.system(size: fontSize))
         }
     }
     
-    var halfStars: some View {
+    private var halfStars: some View {
         ForEach (0..<numHalfStars, id: \.self) { _ in
             Image(systemName: "star.lefthalf.fill")
-                .foregroundColor(RATING_COLOR)
+                .foregroundColor(ratingColor)
                 .font(.system(size: fontSize))
         }
     }
     
-    var emptyStars: some View {
+    private var emptyStars: some View {
         ForEach (0..<numEmptyStars, id: \.self) { _ in
             Image(systemName: "star")
-                .foregroundColor(EMPTY_COLOR)
+                .foregroundColor(emptyColor)
                 .font(.system(size: fontSize))
         }
     }
 }
+
+
