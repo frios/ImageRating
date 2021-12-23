@@ -2,7 +2,7 @@
 
 A simple and configurable star rating view.
 
-StarRating will display a gold star rating from 0-5 in half star increments simply by tapping the view. The simplest way to display the view is as follows:
+StarRating will display a star rating from 0-maxRating in half star or whole star increments simply by tapping the view. The simplest way to display the view is as follows:
 
 ```
 import StarRating
@@ -20,16 +20,16 @@ struct ContentView: View {
 ```
 The following parameters can be added to the view call to further customize its appearance.
 
-fontSize (defaults to 17.0)
+- **fontSize**          (defaults to 17.0)
 
-displayOnly (defaults to false, disables the on tap gesture that allows you to change the rating)
+- **displayOnly**       (defaults to false, true disables the on tap gesture that allows you to change the rating)
 
-maxRating (defaults to 5)
+- **maxRating**         (defaults to 5)
 
-showEmptyStars (defaults to true, false will hide empty stars)
+- **showEmptyStars**    (defaults to true, false will hide empty stars)
 
-allowHalfStars (defaults to true, fasle will ignore the decimal part of a rating rating)
+- **allowHalfStars**    (defaults to true, false will ignore the decimal part of a rating)
 
-ratingColor defaults to gold
+- **ratingColor**       (defaults to gold)
 
-emptyColor deaults to lightGray
+- **emptyColor**        (defaults to lightGray)
