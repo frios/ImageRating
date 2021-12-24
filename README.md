@@ -1,20 +1,20 @@
-# StarRating
+# ImageRating
 
-A simple and configurable star rating view.
+A simple and configurable rating view.
 
-StarRating will display a star rating from 0-maxRating in half star or whole star increments simply by tapping the view. The simplest way to display the view is as follows:
+StarRating will display a sequence of images from 0-maxImages in half or whole increments simply by tapping the view. The simplest way to display the view is as follows:
 
 ```
-import StarRating
+import ImageRating
 import SwiftUI
 
 struct ContentView: View {
     
-    @State private var rating = 3.5
+    @State private var value = 3.5
     
     var body: some View {
-        StarRatingView(rating: $rating)
-            .id(rating)
+        ImageRatingView(value: $value)
+            .id(value)
     }
 }
 ```
@@ -24,12 +24,42 @@ The following parameters can be added to the view call to further customize its 
 
 - **displayOnly**       (defaults to false, true disables the on tap gesture that allows you to change the rating)
 
-- **maxRating**         (defaults to 5)
+- **maxImages**         (defaults to 5)
 
-- **showEmptyStars**    (defaults to true, false will hide empty stars)
+- **fullImageName**     (defaults to star.fill)
 
-- **allowHalfStars**    (defaults to true, false will ignore the decimal part of a rating)
+- **fullColor**         (defaults to gold)
 
-- **ratingColor**       (defaults to gold)
+- **allowHalf**         (defaults to true, false will ignore the decimal part of a rating)
+
+- **halfImageName**     (defaults to star.lefthalf.fill
+
+- **showEmpty**         (defaults to true, false will hide empty stars)
+
+- **emptyImageName**    (defaults to star)
 
 - **emptyColor**        (defaults to lightGray)
+
+
+
+Its easy to make this into a "favorites picker" as well.
+
+```
+import StarRating
+import SwiftUI
+
+struct ContentView: View {
+    
+    @State private var value = 0.0
+    
+    var body: some View {
+        ImageRatingView(value: $value,
+                        maxImages: 1,
+                        fullImageName: "heart.fill",
+                        fullColor: Color.red,
+                        allowHalf: false,
+                        emptyImageName: "heart")
+            .id(value)
+    }
+}
+```
