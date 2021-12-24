@@ -55,7 +55,7 @@ public struct ImageRatingView: View {
     
     public var body: some View {
 //        VStack (alignment: alignment) {
-            HStack (spacing: 5){
+            HStack (spacing: 5) {
                 fullImages
                 
                 if allowHalf {

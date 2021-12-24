@@ -2,7 +2,7 @@
 
 A simple and configurable rating/favorite view.
 
-ImageRating will display a sequence of images from 0-maxImages in half or whole increments simply by tapping the view. The simplest way to display the view is as follows:
+ImageRating will display a sequence of SFSymbols from 0-maxImages in half or whole increments simply by tapping the view. The simplest way to display the view is as follows:
 
 ```
 import ImageRating
