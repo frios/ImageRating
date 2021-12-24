@@ -16,6 +16,7 @@ public struct ImageRatingView: View {
     var value: Binding<Double>
     var fontSize: Double
     var displayOnly: Bool
+    var alignment: HorizontalAlignment
     var maxImages: Int
     var fullImageName: String
     var fullColor: Color
@@ -28,6 +29,7 @@ public struct ImageRatingView: View {
     public init (value: Binding<Double>,
                  fontSize: Double = 17.0,
                  displayOnly: Bool = false,
+                 alignment: HorizontalAlignment = .leading,
                  maxImages: Int = 5,
                  fullImageName: String = "star.fill",
                  fullColor: Color = Color(UIColor(red: 1.0, green: 0.714, blue: 0.0, alpha: 1.0)),
@@ -40,6 +42,7 @@ public struct ImageRatingView: View {
         self.value = value
         self.fontSize = fontSize
         self.displayOnly = displayOnly
+        self.alignment = alignment
         self.maxImages = maxImages
         self.fullImageName = fullImageName
         self.fullColor = fullColor
@@ -51,16 +54,18 @@ public struct ImageRatingView: View {
     }
     
     public var body: some View {
-        HStack (spacing: 5){
-            fullImages
-            
-            if allowHalf {
-                halfImages
+        VStack (alignment: alignment) {
+            HStack (spacing: 5){
+                fullImages
+                
+                if allowHalf {
+                    halfImages
+                }
+                
+                emptyImages
+                    //I change the opacity here because if I use an EmptyView, then you can no longer tap on it
+                    .opacity(showEmpty ? 1.0 : 0.01)
             }
-            
-            emptyImages
-                //I change the opacity here because if I use an EmptyView, then you can no longer tap on it
-                .opacity(showEmpty ? 1.0 : 0.01)
         }
         .onAppear {
             numFull = Int(value.wrappedValue)

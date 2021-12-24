@@ -1,8 +1,8 @@
 # ImageRating
 
-A simple and configurable rating view.
+A simple and configurable rating/favorite view.
 
-StarRating will display a sequence of images from 0-maxImages in half or whole increments simply by tapping the view. The simplest way to display the view is as follows:
+ImageRating will display a sequence of images from 0-maxImages in half or whole increments simply by tapping the view. The simplest way to display the view is as follows:
 
 ```
 import ImageRating
@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var value = 3.5
+    @State private var value = 2.5
     
     var body: some View {
         ImageRatingView(value: $value)
@@ -18,25 +18,28 @@ struct ContentView: View {
     }
 }
 ```
+
+This will show two full gold stars, one half cold star and 2 empty gray stars.
+
 The following parameters can be added to the view call to further customize its appearance.
 
 - **fontSize**          (defaults to 17.0)
 
-- **displayOnly**       (defaults to false, true disables the on tap gesture that allows you to change the rating)
+- **displayOnly**       (defaults to false, true disables the onTap gesture that allows you to change the rating)
 
 - **maxImages**         (defaults to 5)
 
-- **fullImageName**     (defaults to star.fill)
+- **fullImageName**     (defaults to "star.fill")
 
 - **fullColor**         (defaults to gold)
 
 - **allowHalf**         (defaults to true, false will ignore the decimal part of a rating)
 
-- **halfImageName**     (defaults to star.lefthalf.fill
+- **halfImageName**     (defaults to "star.lefthalf.fill")
 
 - **showEmpty**         (defaults to true, false will hide empty stars)
 
-- **emptyImageName**    (defaults to star)
+- **emptyImageName**    (defaults to "star")
 
 - **emptyColor**        (defaults to lightGray)
 
