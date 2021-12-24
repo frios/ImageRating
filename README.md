@@ -19,7 +19,7 @@ struct ContentView: View {
 }
 ```
 
-This will show two full gold stars, one half cold star and 2 empty gray stars.
+This will show two full gold stars, one half gold star and 2 empty gray stars.
 
 The following parameters can be added to the view call to further customize its appearance.
 
